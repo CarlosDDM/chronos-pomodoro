@@ -1,0 +1,18 @@
+services:
+  chronos-pomodoro:
+    image: chronos-pomodoro:1.0
+    container_name: chronos-pomodoro
+    volumes:
+      - chronos-data:/etc/nginx/
+    networks:
+      - apps
+    ports:
+      - 80:80
+    restart: always
+volumes:
+  chronos-data:
+    driver: local
+
+networks:
+  apps:
+    external: true
