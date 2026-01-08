@@ -1,0 +1,23 @@
+.settingsText {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.form input {
+  min-width: 28rem;
+}

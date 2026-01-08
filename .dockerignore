@@ -1,0 +1,10 @@
+#Pastas sem uso para o build
+.vscode
+node_modules
+
+#Ignorando arquivos de configuração
+README.node_modules
+Dockerfile
+.gitignore
+eslint.config.js
+.prettierrc.json
