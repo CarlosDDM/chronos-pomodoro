@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Chronos Pomodoro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sobre Chronos Pomodoro
 
-Currently, two official plugins are available:
+O **Chronos Pomodoro** tem como objetivo te ajudar a gerenciar sua rotina de
+estudo com a técnica pomodoro. O projeto foi criado com **React + Typescript +
+Vite** e, para manter persistentes os dados, ele salva no **LocalStorage** do
+seu navegador. O projeto foi desenvolvido durante aulas na **Udemy** com algumas
+nuances do projeto original.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instruções para o deployment
 
-## React Compiler
+Para fazer o deployment da aplicação recomendo o uso do Docker para diminuir a
+complexidade do deployment em produção.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+> [!NOTE] Use a última versão disponível do Docker, que está disponível em:
+> https://docs.docker.com/engine/install/.
 
-## Expanding the ESLint configuration
+> [!NOTE] Caso queira fazer o deployment local, é necessário ter instalado o
+> Node.js, disponível em: https://nodejs.org/en/download.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Já deduzindo que você tenha o Docker instalado, faça o clone do repositório e
+entre na pasta.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```
+  #comando
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+  cd chronos-pomodoro
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Após entrar no diretório, execute:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+  #comando
+
+  docker network create apps
+```
+
+Em sequência, execute o comando para fazer o build e nomear a tag:
+
+```
+  #comando
+
+  docker build -t chronos-pomodoro:1.0 .
+```
+
+Aguarde finalizar a criação da imagem para poder rodar em seguida o seguinte
+comando:
+
+```
+  #comando
+
+  docker compose up -d
+```
+
+Com isso o deployment estará completo. Para acessar, utilize a URL que ficará
+disponível na sua máquina: http://localhost
+
+> [!IMPORTANT] Como o Nginx utiliza a porta 80, que é o HTTP, não esqueça que
+> ela precisa estar disponível.
+
+> [!TIP] Altere a porta do docker-compose.yml caso seja necessário, assim
+> disponibilizando outra porta para ser acessível em http://localhost:SUA_PORTA
